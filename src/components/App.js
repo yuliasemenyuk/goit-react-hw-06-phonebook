@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Filter from "./Filter/Filter";
@@ -13,10 +14,12 @@ export default function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
 
+  // const contactsValue = useSelector(state => state.myValue)
+
   const [filter, setFilter] = useState("");
 
   const addContact = ({ name, number }) => {
-    console.log(name, number);
+    // console.log(name, number);
 
     const newContact = {
       id: nanoid(),
