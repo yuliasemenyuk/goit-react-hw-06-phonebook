@@ -4,9 +4,15 @@ import { nanoid } from "nanoid";
 import Filter from "./Filter/Filter";
 import Form from "./Form/Form";
 import ContactList from "./ContactList/ContactList";
+
 import style from "./App.css";
 
 export default function App() {
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.myValue);
+  console.log(value);
+  // console.log(value);
+
   const [contacts, setContacts] = useState([
     { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
     { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
@@ -14,13 +20,9 @@ export default function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
 
-  // const contactsValue = useSelector(state => state.myValue)
-
   const [filter, setFilter] = useState("");
 
   const addContact = ({ name, number }) => {
-    // console.log(name, number);
-
     const newContact = {
       id: nanoid(),
       name,
@@ -34,16 +36,10 @@ export default function App() {
       return alert(`${name} is already in contacts`);
     }
     setContacts([...contacts, newContact]);
-    // this.setState(({ contacts }) => ({
-    //   contacts: [newContact, ...contacts],
-    // }));
   };
 
   const deleteContact = (contactId) => {
     setContacts(contacts.filter((c) => c.id !== contactId));
-    // this.setState((prevState) => ({
-    //   contacts: prevState.contacts.filter((c) => c.id !== contactId),
-    // }));
   };
 
   const contactFind = (evt) => {

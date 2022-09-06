@@ -1,10 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { createAction, createReducer } from "@reduxjs/toolkit";
-
-const myReducer = createReducer(0, {});
+import { createAction, createReducer, createSlice } from "@reduxjs/toolkit";
+import { contactsSlice } from "./myValue/slice";
 
 export const store = configureStore({
   reducer: {
-    myValue: myReducer,
+    contacts: contactsSlice.reducer,
   },
 });
