@@ -10,7 +10,6 @@ import style from "./App.css";
 export default function App() {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.myValue);
-  console.log(value);
   // console.log(value);
 
   const [contacts, setContacts] = useState([
