@@ -12,7 +12,7 @@ export const contactsSlice = createSlice({
   },
   reducers: {
     addContact(state, action) {
-      state.newContact = action.payload;
+      state.newContact = [...state.contacts, action.payload];
     },
     deleteContact(state, action) {
       state.contacts = "";

@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
-import ContactItem from "../ContactItem/ContactItem";
+import { ContactItem } from "../ContactItem/ContactItem";
+import { useSelector } from "react-redux";
 import dispatch from "../App";
 
 function ContactList({ contacts, onDeleteContact }) {
