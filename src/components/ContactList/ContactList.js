@@ -4,13 +4,14 @@ import { ContactItem } from "../ContactItem/ContactItem";
 import { useSelector } from "react-redux";
 import dispatch from "../App";
 
-function ContactList({ contacts, onDeleteContact }) {
+function ContactList() {
+  const contacts = useSelector((state) => state.contacts);
   return (
     <ul>
       {contacts.map(({ id, name, number }) => (
         <li key={id}>
           <ContactItem contactItem={{ name, number, id }}></ContactItem>
-          <button onClick={() => onDeleteContact(id)}>Delete</button>
+          <button onClick={() => dispatch(id)}>Delete</button>
         </li>
       ))}
     </ul>

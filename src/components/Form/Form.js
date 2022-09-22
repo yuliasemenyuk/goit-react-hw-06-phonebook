@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { addContact } from "../../redux/myValue/slice";
 import style from "./Form.module.css";
 
-function Form({ onSubmit }) {
+function Form() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -20,7 +20,6 @@ function Form({ onSubmit }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // onSubmit({ name, number });
     dispatch(addContact(name, number));
     reset();
     console.log(name, number);
