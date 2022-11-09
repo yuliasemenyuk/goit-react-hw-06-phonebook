@@ -1,79 +1,82 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
+import { ToastContainer } from "react-toastify";
 import Filter from "./Filter/Filter";
-import Form from "./Form/Form";
-import ContactList from "./ContactList/ContactList";
+import { Form } from "./Form/Form";
+import { ContactList } from "./ContactList/ContactList";
+import { addContact, deleteContact } from "../redux/contactsSlice";
 
 import style from "./App.css";
+import { Provider } from "react-redux/lib/exports";
+import { store } from "../redux/store";
 
-export default function App() {
-  const dispatch = useDispatch();
-  // console.log(value);
+export const App = () => {
+  // return(
+  //   <Layout>
+  //     <AppBar />
+  //     <TaskForm />
+  //     <TaskList />
+  //   </Layout>
+  // );
+  // const dispatch = useDispatch();
+  // // console.log(value);
 
-  const [contacts, setContacts] = useState([
-    { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-    { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-    { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-    { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-  ]);
+  // const [filter, setFilter] = useState("");
 
-  const [filter, setFilter] = useState("");
+  // const addContact = ({ name, number }) => {
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
+  //   if (
+  //     contacts.find(
+  //       (contact) => contact.name.toLowerCase() === name.toLowerCase()
+  //     )
+  //   ) {
+  //     return alert(`${name} is already in contacts`);
+  //   }
+  //   setContacts([...contacts, newContact]);
+  // };
 
-  const addContact = ({ name, number }) => {
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-    if (
-      contacts.find(
-        (contact) => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      return alert(`${name} is already in contacts`);
-    }
-    setContacts([...contacts, newContact]);
-  };
+  // const deleteContact = (contactId) => {
+  //   setContacts(contacts.filter((c) => c.id !== contactId));
+  // };
 
-  const deleteContact = (contactId) => {
-    setContacts(contacts.filter((c) => c.id !== contactId));
-  };
+  // const contactFind = (evt) => {
+  //   setFilter(evt.currentTarget.value);
+  // };
 
-  const contactFind = (evt) => {
-    setFilter(evt.currentTarget.value);
-  };
+  // const getFilteredContacts = () => {
+  //   const normalizedFilter = filter.toLowerCase();
 
-  const getFilteredContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
+  //   return contacts.filter((contact) =>
+  //     contact.name.toLowerCase().includes(normalizedFilter)
+  //   );
+  // };
 
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
+  // useEffect(() => {
+  //   const contacts = localStorage.getItem("contacts");
+  //   const parsedContacts = JSON.parse(contacts);
+  //   if (parsedContacts) {
+  //     setContacts(parsedContacts);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
 
   return (
-    <div className={style.container}>
-      <h1 className={style.title}>Phonebook</h1>
-      <Form onSubmit={addContact} />
-      <h2 className={style.title}>Contacts</h2>
-      <Filter filter={filter} change={contactFind} />
-      <ContactList
-        contacts={getFilteredContacts()}
-        onDeleteContact={deleteContact}
-      />
-    </div>
+    <Provider store={store}>
+      <div className={style.container}>
+        <h1 className={style.title}>Phonebook</h1>
+        <Form onSubmit={addContact} />
+        <h2 className={style.title}>Contacts</h2>
+        <Filter />
+        <ContactList onDeleteContact={deleteContact} />
+        <ToastContainer />
+      </div>
+    </Provider>
   );
-}
+};

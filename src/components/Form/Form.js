@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import propTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { addContact } from "../../redux/myValue/slice";
+import { ToastContainer, toast } from "react-toastify";
+// import propTypes from "prop-types";
+// import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+// import { addContact } from "../../redux/contactsSlice";
+import { useDispatch } from "react-redux/lib/exports";
+import { addContact, contactsReducer } from "../../redux/contactsSlice";
 import style from "./Form.module.css";
 
-function Form() {
+export const Form = () => {
   const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
@@ -18,8 +22,9 @@ function Form() {
     setNumber(evt.target.value);
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //добавить if
     dispatch(addContact(name, number));
     reset();
     console.log(name, number);
@@ -28,6 +33,7 @@ function Form() {
   const reset = () => {
     setName("");
     setNumber("");
+    console.log("це ресет");
   };
 
   return (
@@ -38,7 +44,7 @@ function Form() {
           className={style.input}
           type="text"
           name="name"
-          value={name}
+          // value={name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -51,23 +57,18 @@ function Form() {
           className={style.input}
           type="number"
           name="number"
-          value={number}
+          // value={number}
           required
           onChange={handleNumberInputChange}
         />
       </label>
-      <button className={style.saving_btn} type="submit">
+      <button
+        className={style.saving_btn}
+        onSubmit={handleSubmit}
+        type="submit"
+      >
         Add contact
       </button>
     </form>
   );
-}
-
-Form.propTypes = {
-  handleNameInputChange: propTypes.func,
-  handleNumberInputChange: propTypes.func,
-  handleSubmit: propTypes.func,
-  reset: propTypes.func,
 };
-
-export default Form;
