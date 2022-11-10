@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux/lib/exports";
+import { useDispatch } from "react-redux";
+import { filterContacts } from "../../redux/contactsSlice";
 import style from "./Filter.module.css";
-import propTypes from "prop-types";
 
 const Filter = () => {
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
+
+  const fandleFilterInpChange = (event) => {
+    setFilter(event.currentTarget.value);
+    console.log(filter);
+  };
+
+  dispatch(filterContacts(filter));
 
   return (
     <label className={style.filter_lable}>
@@ -14,7 +21,7 @@ const Filter = () => {
         className={style.filter_input}
         type="text"
         value={filter}
-        // onChange={change}
+        onChange={fandleFilterInpChange}
       />
     </label>
   );

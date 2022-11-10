@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 // import propTypes from "prop-types";
 // import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { addContact } from "../../redux/contactsSlice";
 import { useDispatch } from "react-redux/lib/exports";
-import { addContact, contactsReducer } from "../../redux/contactsSlice";
+import { getContacts } from "../../redux/selectors";
+import { addContact } from "../../redux/contactsSlice";
 import style from "./Form.module.css";
 
 export const Form = () => {
@@ -22,9 +23,14 @@ export const Form = () => {
     setNumber(evt.target.value);
   };
 
+  const contacts = useSelector(getContacts);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     //добавить if
+    // if (contacts.map(contact => contact.name.toLowerCase() === (name.toLowerCase()))) {
+    //   return alert('Already in contacts')
+    // }
     dispatch(addContact(name, number));
     reset();
     console.log(name, number);
