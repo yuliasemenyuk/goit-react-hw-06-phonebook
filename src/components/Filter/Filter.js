@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { filterContacts } from "../../redux/contactsSlice";
 import style from "./Filter.module.css";
@@ -7,9 +7,9 @@ const Filter = () => {
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
 
-  const fandleFilterInpChange = (event) => {
+  const handleFilterInpChange = (event) => {
     setFilter(event.currentTarget.value);
-    console.log(filter);
+    // console.log(filter);
   };
 
   dispatch(filterContacts(filter));
@@ -21,7 +21,7 @@ const Filter = () => {
         className={style.filter_input}
         type="text"
         value={filter}
-        onChange={fandleFilterInpChange}
+        onChange={handleFilterInpChange}
       />
     </label>
   );

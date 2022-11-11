@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 // import propTypes from "prop-types";
 // import { useDispatch } from "react-redux";
@@ -24,7 +24,6 @@ export const Form = () => {
   };
 
   const contacts = useSelector(getContacts);
-  // console.log(contacts);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,7 +53,7 @@ export const Form = () => {
           className={style.input}
           type="text"
           name="name"
-          // value={name}
+          value={name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -67,7 +66,7 @@ export const Form = () => {
           className={style.input}
           type="number"
           name="number"
-          // value={number}
+          value={number}
           required
           onChange={handleNumberInputChange}
         />
