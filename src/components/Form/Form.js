@@ -24,16 +24,20 @@ export const Form = () => {
   };
 
   const contacts = useSelector(getContacts);
+  // console.log(contacts);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //добавить if
-    // if (contacts.map(contact => contact.name.toLowerCase() === (name.toLowerCase()))) {
-    //   return alert('Already in contacts')
-    // }
+    if (
+      contacts.find(
+        (contact) => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      return toast.warning(`${name} is already in contacts`);
+    }
     dispatch(addContact(name, number));
     reset();
-    console.log(name, number);
+    // console.log(name, number);
   };
 
   const reset = () => {

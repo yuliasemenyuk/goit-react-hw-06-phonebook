@@ -7,6 +7,7 @@ import { ContactList } from "./ContactList/ContactList";
 import { addContact, deleteContact } from "../redux/contactsSlice";
 
 import style from "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux/lib/exports";
 import { store } from "../redux/store";
 
@@ -75,7 +76,7 @@ export const App = () => {
         <h2 className={style.title}>Contacts</h2>
         <Filter />
         <ContactList onDeleteContact={deleteContact} />
-        <ToastContainer />
+        <ToastContainer autoClose={2000} />
       </div>
     </Provider>
   );
