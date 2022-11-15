@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-// import propTypes from "prop-types";
-// import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-// import { addContact } from "../../redux/contactsSlice";
-import { useDispatch } from "react-redux/lib/exports";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 import { getContacts } from "../../redux/selectors";
 import { addContact } from "../../redux/contactsSlice";
 import style from "./Form.module.css";
@@ -36,13 +32,11 @@ export const Form = () => {
     }
     dispatch(addContact(name, number));
     reset();
-    // console.log(name, number);
   };
 
   const reset = () => {
     setName("");
     setNumber("");
-    console.log("це ресет");
   };
 
   return (
