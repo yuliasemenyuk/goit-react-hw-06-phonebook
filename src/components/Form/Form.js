@@ -40,7 +40,7 @@ export const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={style.saving_form}>
       <label className={style.saving_lable}>
         Name{" "}
         <input

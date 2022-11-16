@@ -9,15 +9,19 @@ const Filter = () => {
 
   const handleFilterInpChange = (event) => {
     setFilter(event.currentTarget.value);
-    // console.log(filter);
   };
 
-  dispatch(filterContacts(filter));
+  useEffect(() => {
+    dispatch(filterContacts(filter));
+  });
+
+  // dispatch(filterContacts(filter));
 
   return (
     <label className={style.filter_lable}>
       Find contact by name
       <input
+        placeholder="&#x1F50E;  Search..."
         className={style.filter_input}
         type="text"
         value={filter}
@@ -26,10 +30,5 @@ const Filter = () => {
     </label>
   );
 };
-
-// Filter.propTypes = {
-//   filter: propTypes.string.isRequired,
-//   change: propTypes.func.isRequired,
-// };
 
 export default Filter;
